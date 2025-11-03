@@ -1,0 +1,57 @@
+<div class="movie-explorer-container">
+  <!-- Barra de búsqueda -->
+  <app-search-bar (searchQuery)="onSearch($event)"></app-search-bar>
+
+  <!-- Contenido principal -->
+  <div class="content-container">
+    
+    <!-- Estado de carga -->
+    @if (loading()) {
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <p class="loading-text">Buscando películas...</p>
+      </div>
+    }
+
+    <!-- Estado de error -->
+    @if (error() && !loading()) {
+      <div class="error-container">
+        <div class="error-icon">⚠️</div>
+        <h2 class="error-title">¡Ups! Algo salió mal</h2>
+        <p class="error-message">{{ error() }}</p>
+      </div>
+    }
+
+    <!-- Sin resultados -->
+    @if (!loading() && !error() && hasSearched() && movies().length === 0) {
+      <div class="no-results-container">
+        <div class="no-results-icon">🎬</div>
+        <h2 class="no-results-title">No se encontraron películas</h2>
+        <p class="no-results-text">Intenta con otro término de búsqueda</p>
+      </div>
+    }
+
+    <!-- Resultados de la búsqueda -->
+    @if (!loading() && !error() && movies().length > 0) {
+      <div class="results-info">
+        <p>Se encontraron <strong>{{ movies().length }}</strong> películas</p>
+      </div>
+      
+      <div class="movies-grid">
+        @for (movie of movies(); track movie.id) {
+          <app-movie-card [movie]="movie"></app-movie-card>
+        }
+      </div>
+    }
+
+    <!-- Estado inicial (sin búsqueda) -->
+    @if (!loading() && !error() && !hasSearched()) {
+      <div class="welcome-container">
+        <div class="welcome-icon">🍿</div>
+        <h2 class="welcome-title">Bienvenido al Explorador de Películas</h2>
+        <p class="welcome-text">Utiliza la barra de búsqueda para encontrar tus películas favoritas</p>
+      </div>
+    }
+
+  </div>
+</div>

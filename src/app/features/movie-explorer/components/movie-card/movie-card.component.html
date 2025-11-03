@@ -1,0 +1,21 @@
+<div class="movie-card">
+  <div class="movie-poster">
+    <img 
+      [src]="getPosterUrl()" 
+      [alt]="movie.title"
+      class="poster-image"
+      loading="lazy"
+    />
+    <div class="rating-badge" [ngClass]="getRatingClass()">
+      ⭐ {{ getRating() }}
+    </div>
+  </div>
+  
+  <div class="movie-info">
+    <h3 class="movie-title">{{ movie.title }}</h3>
+    <p class="movie-date">{{ getFormattedDate() }}</p>
+    <p class="movie-overview">
+      {{ movie.overview || 'Sin descripción disponible' }}
+    </p>
+  </div>
+</div>

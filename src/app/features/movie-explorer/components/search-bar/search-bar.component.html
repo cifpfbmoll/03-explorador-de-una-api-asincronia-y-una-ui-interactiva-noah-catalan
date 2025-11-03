@@ -1,0 +1,18 @@
+<div class="search-bar-container">
+  <div class="search-bar">
+    <input 
+      type="text" 
+      [formControl]="searchControl" 
+      placeholder="Buscar películas..."
+      class="search-input"
+      (keyup.enter)="onSearch()"
+    />
+    <button 
+      type="button" 
+      (click)="onSearch()" 
+      class="search-button"
+    >
+      🔍 Buscar
+    </button>
+  </div>
+</div>
